@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>IndexedDBWindows10</title>
+        
+        <link href="WinJS/css/ui-dark.css" rel="stylesheet" />
+        <script src="WinJS/js/base.js"></script>
+        <script src="WinJS/js/ui.js"></script>
+        
+        <script src="/js/db.js"></script>                 
+        <script src="/js/default.js"></script>
+    </head>
+    <body class="win-type-body" style="overflow: auto">
+        <div style="margin: 1em">
+            <p>Upon startup the app creates a database with a single table ({ keyPath: "id", autoIncrement: true }) and a background task. The task can be triggered from VS or by changing the time zone.</p>
+            <p>Once triggered, the background task waits 1s and then writes 100 entries at 200ms intervals (not specifying the key). Clicking the button below does the same from the foreground. When writing is done, the contents of the database are shown below.</p>
+            <p>Expected behavior: since the key is auto-incremented, there are 200 entries in the database, 100 from the foreground and 100 from the background.</p>
+            <p>Observed behavior: occasionally there is a key-clash (ConstraintError) between foreground and background and a write operation fails. Typically there are about 5 missing entries per test run.</p>
+        </div>
+        <div id="startButton" class="win-button" style="margin: 1em">Start writes</div>
+        <div id="dataOutput" style="margin: 1em"></div>    
+    </body>
+</html>
